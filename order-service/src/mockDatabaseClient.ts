@@ -14,6 +14,7 @@ export const getOrders = (): Order[] => database.orders
 export const getOrderById = (id: number): Order | undefined =>
     database.orders.find(order => order.id === id)
 
+
 export const createOrder = (userId: string, products: Product[]): Order => {
     const newOrder: Order = {
         id: currentId++,
@@ -85,3 +86,16 @@ export const deleteUser = (id: string): boolean => {
 
 export const getOrdersByUserId = (userId: string): Order[] =>
     database.orders.filter(order => order.userId === userId)
+
+
+export const getOrdersByUserIdAndDate = (userId: string, beforeDate?: Date): Order[] => {
+    if (!beforeDate) {
+        return getOrdersByUserId(userId);
+    }
+
+    return database.orders.filter(order =>
+        order.userId === userId &&
+        order.createdAt <= beforeDate
+    );
+}
+
