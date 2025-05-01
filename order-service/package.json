@@ -14,7 +14,9 @@
     "@fastify/swagger": "^8.14.0",
     "@fastify/swagger-ui": "^4.0.0",
     "axios": "^1.7.2",
-    "fastify": "^4.28.1"
+    "fastify": "^4.28.1",
+    "@grpc/grpc-js": "^1.8.14",
+    "@grpc/proto-loader": "^0.7.7"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
