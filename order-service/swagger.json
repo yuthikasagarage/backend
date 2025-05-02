@@ -7,8 +7,8 @@
     },
     "servers": [
         {
-            "url": "http://localhost:3000",
-            "description": "Development server"
+            "url": "http://localhost/orders-api",
+            "description": "go through NGINX proxy"
         }
     ],
     "paths": {

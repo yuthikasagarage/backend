@@ -14,10 +14,11 @@ server.register(swagger, {
       description: 'Balance microservice for Kanpla',
       version: '1.0.0'
     },
-    host: 'localhost:3001',
+    host: 'localhost',
     schemes: ['http'],
     consumes: ['application/json'],
-    produces: ['application/json']
+    produces: ['application/json'],
+    basePath: '/balance-api'
   }
 });
 
@@ -26,6 +27,12 @@ server.register(swaggerUI, {
   uiConfig: {
     docExpansion: 'full',
     deepLinking: false
+  },
+  transformSpecification: (swaggerObject) => {
+  
+    if (swaggerObject.paths) {
+    }
+    return swaggerObject;
   }
 });
 

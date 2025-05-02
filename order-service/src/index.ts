@@ -41,7 +41,12 @@ server.register(swaggerUI, {
     staticCSP: true,
     transformStaticCSP: header => header,
     transformSpecification: (swaggerObject, request, reply) => {
-        return swaggerObject
+        const modifiedSwaggerObject = { ...swaggerObject } as any;
+        
+        modifiedSwaggerObject.host = 'localhost';
+        modifiedSwaggerObject.basePath = '/orders-api';
+        
+        return modifiedSwaggerObject;
     },
     transformSpecificationClone: true,
 })
