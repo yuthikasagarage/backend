@@ -1,10 +1,10 @@
 import * as grpc from '@grpc/grpc-js'
 import * as protoLoader from '@grpc/proto-loader'
 import path from 'path'
-import { getUserById, getOrdersByUserIdAndDate } from './mockDatabaseClient'
+import { getUserById, getOrdersByUserIdAndDate, getOrdersByUserId } from './mockDatabaseClient'
 
-// Use a path that works in both local and Docker environments
-const PROTO_PATH = path.resolve(__dirname, '../../common.proto')
+
+const PROTO_PATH = process.env.PROTO_PATH || path.resolve(__dirname, '../../protos/common.proto')
 
 const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
     keepCase: true,
@@ -20,12 +20,12 @@ const orderProto = grpc.loadPackageDefinition(packageDefinition).order as any
 function getOrdersByUserIdHandler(call: grpc.ServerUnaryCall<{userId: string, beforeDate?: string}, any>, callback: grpc.sendUnaryData<any>) {
     const { userId, beforeDate } = call.request
 
-
+    
     let userOrders;
     if (beforeDate) {
         userOrders = getOrdersByUserIdAndDate(userId, new Date(beforeDate));
     } else {
-        userOrders = getOrdersByUserIdAndDate(userId);
+        userOrders = getOrdersByUserId(userId);
     }
 
     const ordersWithStringDates = userOrders.map(order => ({

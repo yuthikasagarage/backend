@@ -10,8 +10,11 @@ import { Order } from './types'
 import swagger from '@fastify/swagger'
 import swaggerUI from '@fastify/swagger-ui'
 import path from 'path'
+import { startGrpcServer } from './grpc-server'
 
 const server = fastify({ logger: true })
+
+startGrpcServer()
 
 server.register(swagger, {
     mode: 'static',
@@ -108,8 +111,7 @@ server.delete('/orders/:id', async (request, reply) => {
 
 const start = async () => {
     try {
-        await server.listen(3000)
-        console.log('Server listening on http://localhost:3000')
+        await server.listen({ port: 3000, host: '0.0.0.0' });
     } catch (err) {
         server.log.error(err)
         process.exit(1)

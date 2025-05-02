@@ -92,10 +92,11 @@ export const getOrdersByUserIdAndDate = (userId: string, beforeDate?: Date): Ord
     if (!beforeDate) {
         return getOrdersByUserId(userId);
     }
-
-    return database.orders.filter(order =>
+    
+    const orders = database.orders.filter(order =>
         order.userId === userId &&
-        order.createdAt <= beforeDate
+        order.createdAt >= beforeDate
     );
+    return orders;
 }
 
