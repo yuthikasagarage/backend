@@ -10,17 +10,12 @@ In this project, we aim to tackle a specific challenge that requires your expert
 
 To install and set up the project, please follow these steps:
 
-1. Run `npm install`.
-2. Run `npm start`.
+1. docker-compose build && docker-compose up
 
-## About the project
+Added an nginx reverse proxy so that you can go to the apis in one endpoint for frontend
 
-This project is built on Fastify and uses an in memory database. Here is a quick guide on where to find everything in the project:
+orders-api stays in localhost/order-api/documentation
+balance-api stays in localhost/balance-api/documentation
 
-Swagger: `http://localhost:3000/documentation` - Go here to test the API
-
-Routes: `src/index.ts` - Contains all the routes of the application.
-
-Database: `src/db.ts` - Contains the actual data of the application.
-
-Database client: `src/mockDatabaseClient.ts` - Contains all the logic for operating on the database.
+You can access localhost/orders-api/{any route} 
+You can access localhost/balance-api/{any route}
