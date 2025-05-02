@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  order-service:
+    build:
+      context: ./order-service
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+      - "50051:50051"
+    environment:
+      - GRPC_PORT=50051
+      - PROTO_PATH=/app/protos/common.proto
+    volumes:
+      - ./order-service:/app
+      - /app/node_modules
+      - ./protos:/app/protos
+    command: npm run start
+    networks:
+      - kanpla-network
+
+  balance-service:
+    build:
+      context: ./balance-service
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - PROTO_PATH=/app/protos/common.proto
+    volumes:
+      - ./balance-service:/app
+      - /app/node_modules
+      - ./protos:/app/protos
+    command: npm run start
+    depends_on:
+      - order-service
+    networks:
+      - kanpla-network
+
+networks:
+  kanpla-network:
+    driver: bridge
