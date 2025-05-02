@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package order;
+
+service OrderService {
+
+  rpc GetOrdersByUserId(GetOrdersByUserIdRequest) returns (GetOrdersByUserIdResponse) {}
+
+
+  rpc GetUserBalance(GetUserBalanceRequest) returns (GetUserBalanceResponse) {}
+}
+
+message GetOrdersByUserIdRequest {
+  string userId = 1;
+  string beforeDate = 2;
+}
+
+message GetOrdersByUserIdResponse {
+  repeated Order orders = 1;
+}
+
+message GetUserBalanceRequest {
+  string userId = 1;
+}
+
+message GetUserBalanceResponse {
+  double balance = 1;
+}
+
+message Order {
+  int32 id = 1;
+  string userId = 2;
+  repeated Product products = 3;
+  string createdAt = 4;
+}
+
+message Product {
+  int32 id = 1;
+  string name = 2;
+  double price = 3;
+  int32 count = 4;
+}
