@@ -10,12 +10,15 @@ In this project, we aim to tackle a specific challenge that requires your expert
 
 To install and set up the project, please follow these steps:
 
-1. docker-compose build && docker-compose up
+1. docker-compose up --build
 
 Added an nginx reverse proxy so that you can go to the apis in one endpoint for frontend
 
-orders-api stays in localhost/order-api/documentation
-balance-api stays in localhost/balance-api/documentation
+### orders-api ---> localhost/order-api/documentation
+
+### balance-api ---> localhost/balance-api/documentation
+
 
 You can access localhost/orders-api/{any route} 
+
 You can access localhost/balance-api/{any route}
